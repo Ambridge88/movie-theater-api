@@ -41,7 +41,25 @@ showRouter.get('genres/:genre', async(req,res) => {
 
 })
 
-showRouter.delete('/deleterob', async(req,res) =>{
+showRouter.put('/:id/4', async(req,res) => {
+    try{
+        const Show = await Show.findPk(req,params.id)
+        await showRouter.update({rating: req.params.rating})
+        res.send(Show)
+
+    }
+    catch (error){
+        res.send(error)
+
+    }
+})
+
+
+showRouter.put('/:id/statusUpdate', async(req,res) => {
+
+}) 
+
+showRouter.delete('/delete', async(req,res) =>{
     try{
         const shows = await Show.delete()
         res.send(error)
@@ -51,5 +69,7 @@ showRouter.delete('/deleterob', async(req,res) =>{
 
     }
 })
+
+
 
 module.exports = showRouter;
