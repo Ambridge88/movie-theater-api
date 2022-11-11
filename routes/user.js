@@ -4,7 +4,7 @@ const userRouter = Router()
 const {User, show} = require('./index')
 
 
-userRouter.get('/',async(req, res) => {
+userRouter.get('/id', async(req, res, id) => {
     try{
         const allUsers = await User.findAll();
         res.send(allUsers)
@@ -14,7 +14,7 @@ userRouter.get('/',async(req, res) => {
     }
 })
 
-userRouter.get('/', async(req, res) => {
+userRouter.get('/users/:id', async(req, res) => {
     try{
         const UserOne = await User.findByPk (req, params)
         res.send(UserOne)
@@ -24,7 +24,7 @@ userRouter.get('/', async(req, res) => {
     }
 })
 
-userRouter.get('/shows', async(req, res) => {
+userRouter.get('/users/:id/shows', async(req, res) => {
     try{    
         const allUserShows = await Show.findAll(User.findByPk(id, req, {include: {model: show}}))
     }
@@ -32,6 +32,19 @@ userRouter.get('/shows', async(req, res) => {
         res.send(error)
     }
 })
+
+userRouter.put('/user/2/show9', async(req,res) => {
+    try{
+        const UserTwo = await User.findByPk(UserTwo)
+        res.send(UserTwoShows)
+    }
+    catch (error) {
+        res.send(error)
+    }
+
+})
+
+
 
 module.exports = userRouter;
 
