@@ -1,4 +1,4 @@
-const { Router } = require('express')
+const { Router } = require('express');
 const showRouter = Router()
 const {User, Show} = require('../models/index')
 
@@ -15,19 +15,36 @@ showRouter.get('/', async(req, res) => {
 })
 
 showRouter.get('/:id', async(req,res) => {
-    try {
-        const OneShow = await Show.findByPk(req,params.id)
+    try{
+        const OneShow = await Show.findByPk(req.params.id)
         res.send(OneShow)
     }
-    catch(error) {
+    catch (error){
         res.send(error)
     }
 })
 
-showRouter.delete('/', async(req,res) =>{
+showRouter.get('genres/:genre', async(req,res) => {
     try{
-        const shows = await Show.delete
-        res.send(delete)
+        const allShows = await Show.findAll({
+            where: {
+                genre: req.params.genre
+            }
+         })
+        res.send(allShows)
+        
+    } 
+    catch (error){
+        res.send(error)
+
+    }
+
+})
+
+showRouter.delete('/deleterob', async(req,res) =>{
+    try{
+        const shows = await Show.delete()
+        res.send(error)
     }
     catch(error) {
         res.send(error)
@@ -35,3 +52,4 @@ showRouter.delete('/', async(req,res) =>{
     }
 })
 
+module.exports = showRouter;
