@@ -56,6 +56,21 @@ showRouter.put('/:id/4', async(req,res) => {
 
 
 showRouter.put('/:id/statusUpdate', async(req,res) => {
+    try{
+        const findStatus = findStatus.dataValues.status
+        if(updatedStatus == 'cancelled'){
+            await updatedStatus.update({status: 'on-going'})
+            res.status(200).send('status was cancelled, is now on-going')
+    
+        }
+        else if(updatedStatus == 'on=going'){
+            await updatedStatus.update({status: 'cancelled'})
+            res.status(200).send('status was on-going, now cancelled')
+        }
+    }
+    catch (error){
+        res.send(error)
+    }
 
 }) 
 
